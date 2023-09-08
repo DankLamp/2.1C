@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+
+    <script type="importmap">
+        {
+          "imports": {
+            "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+          }
+        }
+    </script>
+
+    <style>
+        body{
+            background-color:darkslategrey;
+            font-family: Verdana, sans-serif;
+            text-align: center;
+        }
+
+        .top{
+            align-items: center;
+            background-color: rgb(86, 153, 184);
+            padding:4px;
+            width: 50%;
+            border: 5px solid;
+            margin: auto;
+        }
+
+        input{
+            align-items: center;
+            padding:4px;
+            width: 10%;
+            border: 5px solid;
+            margin: auto;
+        }
+
+        .list{
+            color: aliceblue;
+            padding:4px;
+            width: 25%;
+            border: 5px solid;
+            margin: auto;
+            margin-left: 35%;
+            margin-bottom: 10px;
+            font-size: 25px ;
+        }
+
+        .button{
+            background-color: #4c7faf;
+            border: none;
+            color: white;
+            padding: 7px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 class="top">{{message}}</h1>
+        <br>
+        <input type="text" v-model="task" placeholder="'Enter' to add " @keyup.enter="addItem"/>
+
+        <ol>
+            <li v-for="task in taskList" :key="task.id" class="list">
+              <span>{{ task.value }}</span>
+              <br>
+              <button class="button" @click="removeTask(task.id)">Complete</button>
+            </li>
+          </ol>
+    </div>
+
+    <script type="module">
+
+        import { createApp } from "vue";
+
+        let itemId = 0
+        
+        createApp({
+            data() {
+                return {
+                    message: "To Do List",
+                    task: "",
+                    taskList: [],
+                };
+            },
+            methods: {
+                addItem() {
+                    this.taskList.push({
+                        id: itemId++,
+                        value: this.task,
+                    });
+                    this.task = "";
+                    },
+                removeTask(id){
+                    this.taskList = this.taskList.filter((t) => t.id !== id)
+                }   
+            }
+        }).mount("#app");
+    </script>
+</body>
+</html>

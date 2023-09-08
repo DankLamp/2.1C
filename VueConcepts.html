@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h2 {
+            background-color: beige;
+        }
+        h1 {
+            background-color: darkgrey;
+        }
+    </style>
+</head>
+<body>
+    
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <div id="app">
+    <h1> Vue Concepts</h1>
+
+    <!-- _______________________________________________________________________________ -->
+    <h2> V-If Example </h2>
+    <p v-if="trueOrFalse"> 
+        This will say true if the value is true
+    </p>
+    <p v-else>
+        This will say false is the value is false
+    </p>
+    
+    <!-- _______________________________________________________________________________ -->
+    <h2> V-If-Else Example </h2>
+    <p> A random value has been generated <br>
+        If the value is from 0 to 5, '0-5' will show, <br>
+        If the value is from 6 - 10, '6-10' will show <br>
+        If the value is from 11 - 15, 'HIGHER' will show <br>
+    </p>
+
+    <p v-if="value>= 0 && value <=5">
+        0-5
+      </p>
+      <p v-else-if="value>=6 && value <=10">
+        6-10
+      </p>
+      <p v-else>
+        HIGHER
+      </p>
+      
+    <!-- _______________________________________________________________________________ -->
+    
+    <h2>V-for example</h2>
+    <p> There is a vue list, or an array, which is reflected in the following list: </p>
+    <ol>
+        <li v-for="x in TheList">{{ x }}</li>
+    </ol>
+
+    <!-- _______________________________________________________________________________ -->
+    
+    <h2> Basic Form Input handling: v-model</h2>
+    <p> Type something into the box below, and it will be duplicated on the next line </p>
+    <input type="text" v-model="yourText">
+    <p> you entered:{{yourText}}</p>
+    <!-- _______________________________________________________________________________ -->
+      
+      <script>
+        const app = Vue.createApp({
+         data() {
+          return {
+            trueOrFalse: false,
+            value: Math.floor(Math.random() * 16),
+            TheList: [
+                'Sonic',
+                'Knuckles',
+                'Tails',
+                'Eggman',
+            ],
+            yourText: " "
+          };
+         },
+        });
+        app.mount('#app')
+    </script>
+
+    </div>
+</body>
+</html>
